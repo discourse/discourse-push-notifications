@@ -1,0 +1,8 @@
+en:
+  js:
+    discourse_push_notifications:
+      title: "Push Notifications"
+      disable: "Disable Push Notifications"
+      enable: "Enable Push Notifications"
+      enable_note: "You have to change this setting on every browser you use and this will disable Desktop Notifications."
+      disable_note: "You have to change this setting on every browser you use."
