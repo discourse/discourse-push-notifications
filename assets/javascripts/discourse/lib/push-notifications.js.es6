@@ -13,11 +13,27 @@ function sendSubscriptionToServer(subscription) {
   });
 }
 
+function userAgentVersionChecker(agent, version) {
+  const uaMatch = navigator.userAgent.match(new RegExp(`${agent}\/(\\d+)\\.\\d`));
+  if (!uaMatch || parseInt(uaMatch[1]) < version) return false;
+  return true;
+}
+
 export function isPushNotificationsSupported() {
-  return ('serviceWorker' in navigator) &&
-         (ServiceWorkerRegistration &&
-         ('showNotification' in ServiceWorkerRegistration.prototype) &&
-         ('PushManager' in window));
+  if (!(('serviceWorker' in navigator) &&
+     (ServiceWorkerRegistration &&
+     ('showNotification' in ServiceWorkerRegistration.prototype) &&
+     ('PushManager' in window)))) {
+
+    return false;
+  }
+
+  if ((!userAgentVersionChecker('Firefox', 44)) &&
+     (!userAgentVersionChecker('Chrome', 50))) {
+    return false;
+  }
+
+  return true;
 }
 
 export function register(user, callback) {
