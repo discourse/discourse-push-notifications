@@ -2,16 +2,14 @@ require_relative 'base'
 require_dependency 'webpush'
 
 module DiscoursePushNotifications
-  class GCMPusher < Base
-    ENDPOINT = 'https://android.googleapis.com/gcm/send'.freeze
+  class MozillaPusher < Base
+    ENDPOINT = 'https://updates.push.services.mozilla.com/push'.freeze
 
     def self.key_prefix
-      "google-cloud-messaging".freeze
+      "push-services-mozilla".freeze
     end
 
     def self.push(user, payload)
-      return if SiteSetting.gcm_api_key.blank?
-
       updated = false
 
       subscriptions(user).each do |_, subscription|
@@ -31,15 +29,16 @@ module DiscoursePushNotifications
         }
 
         begin
-          Webpush.payload_send(
-            endpoint: subscription["endpoint"],
-            message: message.to_json,
-            p256dh: subscription.dig("keys", "p256dh"),
-            auth: subscription.dig("keys", "auth"),
-            api_key: SiteSetting.gcm_api_key
+          payload = Webpush::Encryption.encrypt(
+            message.to_json,
+            subscription.dig("keys", "p256dh"),
+            subscription.dig("keys", "auth")
           )
-        rescue Webpush::InvalidSubscription
+
+          Webpush::Request.new(subscription["endpoint"], { payload: payload }).perform
+        rescue Webpush::InvalidSubscription => e
           # Delete the subscription from Redis
+          Rails.logger.warn(e)
           updated = true
           subscriptions(user).delete(extract_unique_id(subscription))
         end

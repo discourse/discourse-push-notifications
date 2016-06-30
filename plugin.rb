@@ -16,6 +16,7 @@ after_initialize do
     PLUGIN_NAME ||= "discourse_push_notifications".freeze
 
     autoload :GCMPusher, "#{Rails.root}/plugins/discourse-push-notifications/services/discourse_push_notifications/gcm_pusher"
+    autoload :MozillaPusher, "#{Rails.root}/plugins/discourse-push-notifications/services/discourse_push_notifications/mozilla_pusher"
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
@@ -56,6 +57,9 @@ after_initialize do
       if endpoint.start_with?(DiscoursePushNotifications::GCMPusher::ENDPOINT)
         DiscoursePushNotifications::GCMPusher.subscribe(current_user, push_params)
         render json: success_json
+      elsif endpoint.start_with?(DiscoursePushNotifications::MozillaPusher::ENDPOINT)
+        DiscoursePushNotifications::MozillaPusher.subscribe(current_user, push_params)
+        render json: success_json
       else
         render json: failed_json
       end
@@ -66,6 +70,9 @@ after_initialize do
 
       if endpoint.start_with?(DiscoursePushNotifications::GCMPusher::ENDPOINT)
         DiscoursePushNotifications::GCMPusher.unsubscribe(current_user, push_params)
+        render json: success_json
+      elsif endpoint.start_with?(DiscoursePushNotifications::MozillaPusher::ENDPOINT)
+        DiscoursePushNotifications::MozillaPusher.unsubscribe(current_user, push_params)
         render json: success_json
       else
         render json: failed_json
@@ -100,12 +107,18 @@ after_initialize do
 
       def execute(args)
         user = User.find(args[:user_id])
-        DiscoursePushNotifications::GCMPusher.push(user, args[:payload])
+
+        [
+          DiscoursePushNotifications::GCMPusher,
+          DiscoursePushNotifications::MozillaPusher
+        ].each do |pusher|
+          pusher.public_send(:push, user, args[:payload])
+        end
       end
     end
   end
 
-  DiscourseEvent.on(:post_alert_notification) do |user, payload|
+  DiscourseEvent.on(:post_notification_alert) do |user, payload|
     Jobs.enqueue(:send_push_notifications, { user_id: user.id, payload: payload })
   end
 end
