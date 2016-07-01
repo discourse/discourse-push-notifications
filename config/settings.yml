@@ -1,0 +1,10 @@
+plugins:
+  push_notifications_enabled:
+    default: false
+    client: true
+  gcm_sender_id:
+    default: ''
+    client: true
+  gcm_api_key:
+    default: ''
+    client: true
