@@ -11,4 +11,4 @@ es:
       replied: '%{username} te respondió en "%{topic}" - %{site_title}'
       posted: '%{username} publicó en "%{topic}" - %{site_title}'
       private_message: '%{username} te envió un mensaje privado en "%{topic}" - %{site_title}'
-linked: '%{username} enlazó a tu post desde "%{topic}" - %{site_title}'
+      linked: '%{username} enlazó a tu post desde "%{topic}" - %{site_title}'
