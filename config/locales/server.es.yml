@@ -1,0 +1,14 @@
+es:
+  site_settings:
+    push_notifications_enabled: ¿Activar notificaciones push?
+    gcm_sender_id: "Google Cloud Messaging Sender ID; mira https://developers.google.com/cloud-messaging/"
+    gcm_api_key: "Google Cloud Messaging API Key"
+  discourse_push_notifications:
+    popup:
+      mentioned: '%{username} te mencionó en "%{topic}" - %{site_title}'
+      group_mentioned: '%{username} te mencionó en "%{topic}" - %{site_title}'
+      quoted: '%{username} te citó en "%{topic}" - %{site_title}'
+      replied: '%{username} te respondió en "%{topic}" - %{site_title}'
+      posted: '%{username} publicó en "%{topic}" - %{site_title}'
+      private_message: '%{username} te envió un mensaje privado en "%{topic}" - %{site_title}'
+linked: '%{username} enlazó a tu post desde "%{topic}" - %{site_title}'
