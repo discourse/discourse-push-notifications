@@ -9,8 +9,6 @@ gem 'webpush', '0.2.3'
 
 enabled_site_setting :push_notifications_enabled
 
-register_asset "javascripts/push-service-worker.js"
-
 after_initialize do
   module ::DiscoursePushNotifications
     PLUGIN_NAME ||= "discourse_push_notifications".freeze
@@ -44,7 +42,7 @@ after_initialize do
     skip_before_filter :preload_json, :check_xhr, :verify_authenticity_token
 
     def push
-      render file: Rails.application.assets.find_asset('javascripts/push-service-worker.js').pathname, content_type: Mime::JS
+      render file: "#{Rails.root}/plugins/discourse-push-notifications/assets/javascripts/push-service-worker.js", content_type: Mime::JS
     end
   end
 
