@@ -1,0 +1,8 @@
+es:
+  js:
+    discourse_push_notifications:
+      title: "Notificaciones Push"
+      disable: "Desactivar notificaciones push"
+      enable: "Activar notificaciones push"
+      enable_note: "Tendrías que cambiar esta opción en todos los navegadores que utilices y esto desactivará las notificaciones de escritorio."
+      disable_note: "Tendrías que cambiar esta opción en todos los navegadores que utilices."
