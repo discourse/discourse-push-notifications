@@ -42,7 +42,7 @@ export function register(user, callback) {
     return;
   }
 
-  navigator.serviceWorker.register('/push-service-worker.js').then(() => {
+  navigator.serviceWorker.register(`${Discourse.BaseUri}/push-service-worker.js`).then(() => {
     if (Notification.permission === 'denied' || !user) return;
 
     navigator.serviceWorker.ready.then(serviceWorkerRegistration => {

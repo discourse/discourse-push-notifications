@@ -38,6 +38,8 @@ after_initialize do
 
   require_dependency "application_controller"
   class DiscoursePushNotifications::ServiceWorkerController < ::ApplicationController
+    requires_plugin DiscoursePushNotifications::PLUGIN_NAME
+
     layout false
     skip_before_filter :preload_json, :check_xhr, :verify_authenticity_token
 
@@ -47,6 +49,8 @@ after_initialize do
   end
 
   class DiscoursePushNotifications::PushController < ::ApplicationController
+    requires_plugin DiscoursePushNotifications::PLUGIN_NAME
+
     layout false
     before_filter :ensure_logged_in
     skip_before_filter :preload_json
@@ -100,6 +104,11 @@ after_initialize do
     end
   end
 
+  DiscourseEvent.on(:post_notification_alert) do |user, payload|
+    return unless SiteSetting.push_notifications_enabled?
+    Jobs.enqueue(:send_push_notifications, { user_id: user.id, payload: payload })
+  end
+
   require_dependency "jobs/base"
   module ::Jobs
     class SendPushNotifications < Jobs::Base
@@ -116,9 +125,5 @@ after_initialize do
         end
       end
     end
-  end
-
-  DiscourseEvent.on(:post_notification_alert) do |user, payload|
-    Jobs.enqueue(:send_push_notifications, { user_id: user.id, payload: payload })
   end
 end
