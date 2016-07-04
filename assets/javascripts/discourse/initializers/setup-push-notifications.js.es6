@@ -6,10 +6,14 @@ import {
 
 export default {
   name: 'setup-push-notifications',
-  initialize() {
+  initialize(container) {
     withPluginApi('0.1', api => {
-      if (!Ember.testing) {
-        registerPushNotifications(api.getCurrentUser());
+      const siteSettings = container.lookup('site-settings:main');
+      const site = container.lookup('site:main');
+
+      if (!Ember.testing && siteSettings.push_notifications_enabled) {
+        const mobileView = site.mobileView;
+        registerPushNotifications(api.getCurrentUser(), mobileView);
       }
     });
   }

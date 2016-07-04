@@ -13,13 +13,14 @@ function sendSubscriptionToServer(subscription) {
   });
 }
 
-function userAgentVersionChecker(agent, version) {
+function userAgentVersionChecker(agent, version, mobileView) {
   const uaMatch = navigator.userAgent.match(new RegExp(`${agent}\/(\\d+)\\.\\d`));
+  if (uaMatch && mobileView) return false;
   if (!uaMatch || parseInt(uaMatch[1]) < version) return false;
   return true;
 }
 
-export function isPushNotificationsSupported() {
+export function isPushNotificationsSupported(mobileView) {
   if (!(('serviceWorker' in navigator) &&
      (ServiceWorkerRegistration &&
      ('showNotification' in ServiceWorkerRegistration.prototype) &&
@@ -28,7 +29,7 @@ export function isPushNotificationsSupported() {
     return false;
   }
 
-  if ((!userAgentVersionChecker('Firefox', 44)) &&
+  if ((!userAgentVersionChecker('Firefox', 44, mobileView)) &&
      (!userAgentVersionChecker('Chrome', 50))) {
     return false;
   }
@@ -36,11 +37,8 @@ export function isPushNotificationsSupported() {
   return true;
 }
 
-export function register(user, callback) {
-  if (!isPushNotificationsSupported()) {
-    if (callback) callback();
-    return;
-  }
+export function register(user, mobileView) {
+  if (!isPushNotificationsSupported(mobileView)) return;
 
   navigator.serviceWorker.register(`${Discourse.BaseUri}/push-service-worker.js`).then(() => {
     if (Notification.permission === 'denied' || !user) return;
