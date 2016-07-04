@@ -49,8 +49,6 @@ export function register(user, mobileView) {
           sendSubscriptionToServer(subscription);
           // Resync localStorage
           keyValueStore.setItem(userSubscriptionKey(user), 'subscribed');
-        } else {
-          if (callback) callback();
         }
       }).catch(e => Ember.Logger.error(e));
     });
