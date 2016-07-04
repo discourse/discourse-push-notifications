@@ -107,6 +107,13 @@ after_initialize do
     Jobs.enqueue(:send_push_notifications, { user_id: user.id, payload: payload })
   end
 
+  DiscourseEvent.on(:user_logged_out) do |user|
+    return unless SiteSetting.push_notifications_enabled?
+    DiscoursePushNotifications::GCMPusher.clear_subscriptions(user)
+    DiscoursePushNotifications::MozillaPusher.clear_subscriptions(user)
+    user.save_custom_fields(true)
+  end
+
   require_dependency "jobs/base"
   module ::Jobs
     class SendPushNotifications < Jobs::Base
