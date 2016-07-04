@@ -14,6 +14,11 @@ module DiscoursePushNotifications
       user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME][key_prefix]
     end
 
+    def self.clear_subscriptions(user)
+      user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME] ||= {}
+      user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME][key_prefix] = {}
+    end
+
     def self.subscribe(user, subscription)
       subscriptions(user)[extract_unique_id(subscription)] = subscription.to_json
       user.save_custom_fields(true)
