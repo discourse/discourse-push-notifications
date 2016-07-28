@@ -1,3 +1,4 @@
+import { ajax } from 'discourse/lib/ajax';
 import KeyValueStore from 'discourse/lib/key-value-store';
 
 export const keyValueStore = new KeyValueStore("discourse_push_notifications_");
@@ -7,7 +8,7 @@ export function userSubscriptionKey(user) {
 }
 
 function sendSubscriptionToServer(subscription) {
-  Discourse.ajax('/push_notifications/subscribe', {
+  ajax('/push_notifications/subscribe', {
     type: 'POST',
     data: { subscription: subscription.toJSON() }
   });
@@ -74,7 +75,7 @@ export function unsubscribe(callback) {
       if (subscription) {
         subscription.unsubscribe().then((successful) => {
           if (successful) {
-            Discourse.ajax('/push_notifications/unsubscribe', {
+            ajax('/push_notifications/unsubscribe', {
               type: 'POST',
               data: { subscription: subscription.toJSON() }
             });
