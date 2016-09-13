@@ -96,9 +96,11 @@ after_initialize do
           gcm_sender_id: SiteSetting.gcm_sender_id,
           gcm_user_visible_only: true # This is required for Chrome 42 up to Chrome 44
         })
+        
+        render json: manifest.to_json
+      else
+        render json: default_manifest.to_json
       end
-
-      render json: manifest.to_json
     end
   end
 
