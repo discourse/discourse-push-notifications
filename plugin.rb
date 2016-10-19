@@ -96,7 +96,7 @@ after_initialize do
           gcm_sender_id: SiteSetting.gcm_sender_id,
           gcm_user_visible_only: true # This is required for Chrome 42 up to Chrome 44
         })
-        
+
         render json: manifest.to_json
       else
         render json: default_manifest.to_json
@@ -122,6 +122,8 @@ after_initialize do
       sidekiq_options retry: false
 
       def execute(args)
+        return if !SiteSetting.push_notifications_enabled?
+
         user = User.find(args[:user_id])
 
         [
