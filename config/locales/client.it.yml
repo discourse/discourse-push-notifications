@@ -1,0 +1,8 @@
+it:
+  js:
+    discourse_push_notifications:
+      title: "Notifiche Push"
+      disable: "Disabilita Notifiche Push"
+      enable: "Abilita Notifiche Push"
+      enable_note: "È necessario modificare questa impostazione su ogni browser che si utilizza e verranno disattivate le Notifiche Desktop."
+      disable_note: "È necessario modificare questa impostazione su ogni browser che si utilizza."
