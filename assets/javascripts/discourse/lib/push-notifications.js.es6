@@ -53,14 +53,17 @@ export function register(user, mobileView) {
         }
       }).catch(e => Ember.Logger.error(e));
     });
-  });
+  }).catch(e => Ember.Logger.error(e));
 }
 
-export function subscribe(callback) {
+export function subscribe(callback, applicationServerKey) {
   if (!isPushNotificationsSupported()) return;
 
   navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
-    serviceWorkerRegistration.pushManager.subscribe({ userVisibleOnly: true }).then(subscription => {
+    serviceWorkerRegistration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: new Uint8Array(applicationServerKey.split("|"))
+    }).then(subscription => {
       sendSubscriptionToServer(subscription);
       if (callback) callback();
     }).catch(e => Ember.Logger.error(e));

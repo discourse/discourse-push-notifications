@@ -51,7 +51,7 @@ export default Ember.Component.extend({
         desktopNotificationkeyValueStore.setItem('notifications-disabled', 'disabled');
         unsubscribeToNotificationAlert(this.messageBus, this.currentUser);
         this.set("pushNotificationSubscribed", 'subscribed');
-      });
+      }, this.siteSettings.vapid_public_key_bytes);
     },
 
     unsubscribe() {

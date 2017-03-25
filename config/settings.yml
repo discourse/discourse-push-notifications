@@ -2,9 +2,13 @@ plugins:
   push_notifications_enabled:
     default: false
     client: true
-  gcm_sender_id:
+  vapid_public_key_bytes:
     default: ''
     client: true
-  gcm_api_key:
+    hidden: true
+  vapid_public_key:
     default: ''
-    client: true
+    hidden: true
+  vapid_private_key:
+    default: ''
+    hidden: true
