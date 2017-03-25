@@ -1,6 +1,6 @@
 # name: discourse-push-notifications
 # about: Plugin for integrating Chrome and FireFox push notifications
-# version: 0.0.1
+# version: 0.1.0
 # authors: Alan Guo Xiang Tan
 # url: https://github.com/discourse/discourse-push-notifications
 
