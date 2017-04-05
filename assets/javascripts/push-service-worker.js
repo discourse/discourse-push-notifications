@@ -43,8 +43,9 @@ self.addEventListener('notificationclick', function(event) {
           if (client.url === url && 'focus' in client) {
             return client.focus();
           }
+
           if ('navigate' in client) {
-            return client.navigate(url).then(function(client) {return client.focus();});
+            return client.navigate(url).then(function(client) { return client.focus(); });
           }
         });
 
