@@ -40,7 +40,12 @@ self.addEventListener('notificationclick', function(event) {
     clients.matchAll({ type: "window" })
       .then(function(clientList) {
         clientList.forEach(function(client) {
-          if (client.url === url && 'focus' in client) return client.focus();
+          if (client.url === url && 'focus' in client) {
+            return client.focus();
+          }
+          if ('navigate' in client) {
+            return client.navigate(url).then(function(client) {return client.focus();});
+          }
         });
 
         if (clients.openWindow) return clients.openWindow(url);
