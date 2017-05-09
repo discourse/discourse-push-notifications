@@ -39,17 +39,21 @@ self.addEventListener('notificationclick', function(event) {
   event.waitUntil(
     clients.matchAll({ type: "window" })
       .then(function(clientList) {
-        clientList.forEach(function(client) {
+        var reusedClientWindow = clientList.some(function(client) {
           if (client.url === url && 'focus' in client) {
-            return client.focus();
+            client.focus();
+            return true;
           }
 
-          if ('navigate' in client) {
-            return client.navigate(url).then(function(client) { return client.focus(); });
+          if ('navigate' in client && 'focus' in client) {
+            client.focus();
+            client.navigate(url);
+            return true;
           }
+          return false;
         });
 
-        if (clients.openWindow) return clients.openWindow(url);
+        if (!reusedClientWindow && clients.openWindow) return clients.openWindow(url);
       })
   );
 });
