@@ -49,6 +49,9 @@ after_initialize do
     skip_before_filter :preload_json, :check_xhr, :verify_authenticity_token
 
     def push
+      response.cache_control[:max_age] = 1.year.to_i
+      response.cache_control[:public] = true
+      response.cache[:extras] = ["immutable"]
       render file: "#{Rails.root}/plugins/discourse-push-notifications/assets/javascripts/push-service-worker.js", content_type: Mime::JS
     end
   end
