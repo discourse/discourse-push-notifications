@@ -30,7 +30,6 @@ module DiscoursePushNotifications
             Discourse.base_url
           end
 
-
         begin
           response = Webpush.payload_send(
             endpoint: subscription["endpoint"],

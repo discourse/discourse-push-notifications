@@ -81,7 +81,7 @@ after_initialize do
 
   DiscourseEvent.on(:post_notification_alert) do |user, payload|
     return unless SiteSetting.push_notifications_enabled?
-    Jobs.enqueue(:send_push_notifications, { user_id: user.id, payload: payload })
+    Jobs.enqueue(:send_push_notifications, user_id: user.id, payload: payload)
   end
 
   DiscourseEvent.on(:user_logged_out) do |user|

@@ -6,7 +6,7 @@ describe ::DiscoursePushNotifications::Pusher do
 
   describe ".extract_unique_id" do
     it "extracts the registration id from the endpoint" do
-      expect(described_class.send('extract_unique_id', { "endpoint" => endpoint })).to eq(registration_id)
+      expect(described_class.send('extract_unique_id', "endpoint" => endpoint)).to eq(registration_id)
     end
   end
 end
