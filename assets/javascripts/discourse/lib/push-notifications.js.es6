@@ -62,7 +62,7 @@ export function subscribe(callback, applicationServerKey) {
   navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
     serviceWorkerRegistration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: new Uint8Array(applicationServerKey.split("|"))
+      applicationServerKey: new Uint8Array(applicationServerKey.split("|")) // eslint-disable-line no-undef
     }).then(subscription => {
       sendSubscriptionToServer(subscription);
       if (callback) callback();
