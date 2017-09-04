@@ -46,7 +46,7 @@ after_initialize do
     requires_plugin DiscoursePushNotifications::PLUGIN_NAME
 
     layout false
-    skip_before_filter :preload_json, :check_xhr, :verify_authenticity_token
+    skip_before_action :preload_json, :check_xhr, :verify_authenticity_token
 
     def push
       response.cache_control[:max_age] = 1.year.to_i
@@ -59,8 +59,8 @@ after_initialize do
     requires_plugin DiscoursePushNotifications::PLUGIN_NAME
 
     layout false
-    before_filter :ensure_logged_in
-    skip_before_filter :preload_json
+    before_action :ensure_logged_in
+    skip_before_action :preload_json
 
     def subscribe
       DiscoursePushNotifications::Pusher.subscribe(current_user, push_params)
