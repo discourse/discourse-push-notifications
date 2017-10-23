@@ -80,14 +80,16 @@ after_initialize do
   end
 
   DiscourseEvent.on(:post_notification_alert) do |user, payload|
-    return unless SiteSetting.push_notifications_enabled?
-    Jobs.enqueue(:send_push_notifications, user_id: user.id, payload: payload)
+    if SiteSetting.push_notifications_enabled?
+      Jobs.enqueue(:send_push_notifications, user_id: user.id, payload: payload)
+    end
   end
 
   DiscourseEvent.on(:user_logged_out) do |user|
-    return unless SiteSetting.push_notifications_enabled?
-    DiscoursePushNotifications::Pusher.clear_subscriptions(user)
-    user.save_custom_fields(true)
+    if SiteSetting.push_notifications_enabled?
+      DiscoursePushNotifications::Pusher.clear_subscriptions(user)
+      user.save_custom_fields(true)
+    end
   end
 
   require_dependency "jobs/base"
