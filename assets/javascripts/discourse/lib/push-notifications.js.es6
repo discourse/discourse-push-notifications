@@ -38,7 +38,7 @@ export function isPushNotificationsSupported(mobileView) {
   return true;
 }
 
-export function register(user, mobileView) {
+export function register(user, mobileView, router) {
   if (!isPushNotificationsSupported(mobileView)) return;
 
   let url = `${window.location.protocol}//${Discourse.BaseUrl}`;
@@ -57,6 +57,13 @@ export function register(user, mobileView) {
       }).catch(e => Ember.Logger.error(e));
     });
   }).catch(e => Ember.Logger.error(e));
+
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if ('url' in event.data) {
+      const url = event.data.url;
+      router.handleURL(url);
+    }
+  });
 }
 
 export function subscribe(callback, applicationServerKey) {

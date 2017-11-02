@@ -18,7 +18,8 @@ module DiscoursePushNotifications
           body: payload[:excerpt],
           icon: SiteSetting.logo_small_url || SiteSetting.logo_url,
           tag: "#{Discourse.current_hostname}-#{payload[:topic_id]}",
-          url: "#{Discourse.base_url}#{payload[:post_url]}"
+          base_url: Discourse.base_url,
+          url: payload[:post_url]
         }
 
         subject =
