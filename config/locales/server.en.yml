@@ -1,6 +1,7 @@
 en:
   site_settings:
     push_notifications_enabled: Enable push notifications?
+    push_notifications_prompt: Display user consent prompt.
   discourse_push_notifications:
     popup:
       mentioned: '%{username} mentioned you in "%{topic}" - %{site_title}'
@@ -10,3 +11,5 @@ en:
       posted: '%{username} posted in "%{topic}" - %{site_title}'
       private_message: '%{username} sent you a private message in "%{topic}" - %{site_title}'
       linked: '%{username} linked to your post from "%{topic}" - %{site_title}'
+      confirm_title: 'Notifications enabled - %{site_title}'
+      confirm_body: 'Success! Notifications have been enabled.'

@@ -3,9 +3,14 @@
     <label class="control-label">{{i18n 'discourse_push_notifications.title'}}</label>
     <div class="controls">
       <div>
-        {{#if pushNotificationSubscribed}}
+        {{#if isDeniedPermission}}
+          {{d-button icon="bell-slash-o" label="user.desktop_notifications.perm_denied_btn" disabled="true"}}
+          {{i18n "user.desktop_notifications.perm_denied_expl"}}
+        {{/if}}
+        {{#if isSubscribed}}
           {{d-button icon="bell-slash-o" label="discourse_push_notifications.disable" action="unsubscribe"}}
-        {{else}}
+        {{/if}}
+        {{#if isAvailable}}
           {{d-button icon="bell-o" label="discourse_push_notifications.enable" action="subscribe"}}
         {{/if}}
       </div>
