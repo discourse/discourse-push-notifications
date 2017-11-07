@@ -56,6 +56,14 @@ module DiscoursePushNotifications
 
     def self.subscriptions(user)
       user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME] ||= {}
+      # this might be an array due to merging, so resovle the merge.
+      if user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME].kind_of?(Array)
+        merged_subscriptions = {}
+        user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME].each do |subscription|
+          merged_subscriptions = merged_subscriptions.merge(subscription[SUBSCRIPTION_KEY])
+        end
+        user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME] = merged_subscriptions
+      end
       user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME][SUBSCRIPTION_KEY] ||= {}
       user.custom_fields[DiscoursePushNotifications::PLUGIN_NAME][SUBSCRIPTION_KEY]
     end
