@@ -41,7 +41,7 @@ export function isPushNotificationsSupported(mobileView) {
 export function register(user, mobileView) {
   if (!isPushNotificationsSupported(mobileView)) return;
 
-  navigator.serviceWorker.register(`${Discourse.BaseUri}/push-service-worker.js`).then(() => {
+  navigator.serviceWorker.register(`${Discourse.BaseUri}/service-worker.js`).then(() => {
     if (Notification.permission === 'denied' || !user) return;
 
     navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
