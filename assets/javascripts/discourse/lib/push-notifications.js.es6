@@ -40,23 +40,17 @@ export function isPushNotificationsSupported(mobileView) {
 
 export function register(user, mobileView, router) {
   if (!isPushNotificationsSupported(mobileView)) return;
-
-  let url = `${window.location.protocol}//${Discourse.BaseUrl}`;
-  if (window.location.port) url = `${url}:${window.location.port}`;
-
-  navigator.serviceWorker.register(`${url}/${Discourse.BaseUri}/push-service-worker.js`).then(() => {
     if (Notification.permission === 'denied' || !user) return;
 
-    navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
-      serviceWorkerRegistration.pushManager.getSubscription().then(subscription => {
-        if (subscription) {
-          sendSubscriptionToServer(subscription);
-          // Resync localStorage
-          keyValueStore.setItem(userSubscriptionKey(user), 'subscribed');
-        }
-      }).catch(e => Ember.Logger.error(e));
-    });
-  }).catch(e => Ember.Logger.error(e));
+  navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
+    serviceWorkerRegistration.pushManager.getSubscription().then(subscription => {
+      if (subscription) {
+        sendSubscriptionToServer(subscription);
+        // Resync localStorage
+        keyValueStore.setItem(userSubscriptionKey(user), 'subscribed');
+      }
+    }).catch(e => Ember.Logger.error(e));
+  });
 
   navigator.serviceWorker.addEventListener('message', (event) => {
     if ('url' in event.data) {

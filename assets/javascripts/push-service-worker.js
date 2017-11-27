@@ -1,6 +1,3 @@
-/* eslint-disable */
-'use strict';
-
 function showNotification(title, body, icon, tag, baseUrl, url) {
   var notificationOptions = {
     body: body,

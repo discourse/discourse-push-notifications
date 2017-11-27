@@ -9,6 +9,8 @@ gem 'webpush', '0.3.2'
 
 enabled_site_setting :push_notifications_enabled
 
+register_service_worker "javascripts/push-service-worker.js"
+
 after_initialize do
   module ::DiscoursePushNotifications
     PLUGIN_NAME ||= "discourse_push_notifications".freeze
@@ -38,23 +40,9 @@ after_initialize do
 
   Discourse::Application.routes.append do
     mount ::DiscoursePushNotifications::Engine, at: "/push_notifications"
-    get "/push-service-worker.js" => "discourse_push_notifications/service_worker#push"
   end
 
   require_dependency "application_controller"
-  class DiscoursePushNotifications::ServiceWorkerController < ::ApplicationController
-    requires_plugin DiscoursePushNotifications::PLUGIN_NAME
-
-    layout false
-    skip_before_action :preload_json, :check_xhr, :verify_authenticity_token
-
-    def push
-      response.cache_control[:max_age] = 1.year.to_i
-      response.cache_control[:public] = true
-      render file: "#{Rails.root}/plugins/discourse-push-notifications/assets/javascripts/push-service-worker.js", content_type: Mime[:js]
-    end
-  end
-
   class DiscoursePushNotifications::PushController < ::ApplicationController
     requires_plugin DiscoursePushNotifications::PLUGIN_NAME
 
