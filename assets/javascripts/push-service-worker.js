@@ -42,13 +42,11 @@ self.addEventListener('notificationclick', function(event) {
       .then(function(clientList) {
         var reusedClientWindow = clientList.some(function(client) {
           if (client.url === baseUrl + url && 'focus' in client) {
-            debugger;
             client.focus();
             return true;
           }
 
           if ('postMessage' in client && 'focus' in client) {
-            debugger;
             client.focus();
             client.postMessage({ url: url });
             return true;
