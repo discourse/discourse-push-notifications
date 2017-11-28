@@ -4,8 +4,8 @@
 # authors: Alan Guo Xiang Tan
 # url: https://github.com/discourse/discourse-push-notifications
 
-gem 'hkdf', '0.2.0'
-gem 'webpush', '0.3.1'
+gem 'hkdf', '0.3.0'
+gem 'webpush', '0.3.2'
 
 enabled_site_setting :push_notifications_enabled
 
