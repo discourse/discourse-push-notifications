@@ -40,6 +40,7 @@ after_initialize do
 
   Discourse::Application.routes.append do
     mount ::DiscoursePushNotifications::Engine, at: "/push_notifications"
+    get "/push-service-worker.js" => redirect("/service-worker.js")
   end
 
   require_dependency "application_controller"
