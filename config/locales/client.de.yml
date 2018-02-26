@@ -1,0 +1,8 @@
+de:
+  js:
+    discourse_push_notifications:
+      title: "Push-Benachrichtigungen"
+      disable: "Push-Benachrichtigungen deaktivieren"
+      enable: "Push-Benachrichtigungen aktivieren"
+      enable_note: "Du musst diese Einstellung in jedem Browser den du verwendest ändern!"
+      disable_note: "Du musst diese Einstellung in jedem Browser den du verwendest ändern!"
