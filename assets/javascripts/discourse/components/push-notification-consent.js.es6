@@ -26,17 +26,9 @@ export default Ember.Component.extend({
       return pushNotificationKeyValueStore.getItem(pushNotificationUserDismissedPrompt(user));
     },
     get() {
-      return pushNotificationKeyValueStore.getItem(pushNotificationUserDismissedPrompt(Discourse.User.current()));
+      const user = Discourse.User.current();
+      return user ? pushNotificationKeyValueStore.getItem(pushNotificationUserDismissedPrompt(user)) : false;
     }
-  },
-
-  @computed
-  showPushNotificationPrompt() {
-    return (this.siteSettings.push_notifications_enabled &&
-            this.siteSettings.push_notifications_prompt &&
-            Notification.permission !== "denied" &&
-              isPushNotificationsSupported() && this.currentUser
-            );
   },
 
   @computed
@@ -47,8 +39,20 @@ export default Ember.Component.extend({
       return pushNotificationKeyValueStore.getItem(pushNotificationUserSubscriptionKey(user));
     },
     get() {
-      return pushNotificationKeyValueStore.getItem(pushNotificationUserSubscriptionKey(Discourse.User.current()));
+      const user = Discourse.User.current();
+      return user ? pushNotificationKeyValueStore.getItem(pushNotificationUserSubscriptionKey(user)) : false;
     }
+  },
+
+  @computed("pushNotificationSubscribed", "bannerDismissed")
+  showPushNotificationPrompt(pushNotificationSubscribed, bannerDismissed) {
+    return (this.siteSettings.push_notifications_enabled &&
+            this.siteSettings.push_notifications_prompt &&
+            Notification.permission !== "denied" &&
+            isPushNotificationsSupported() && this.currentUser
+            && !pushNotificationSubscribed
+            && !bannerDismissed
+           );
   },
 
   actions: {
