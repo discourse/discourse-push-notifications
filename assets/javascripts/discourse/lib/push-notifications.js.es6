@@ -7,10 +7,14 @@ export function userSubscriptionKey(user) {
   return `subscribed-${user.get('id')}`;
 }
 
-function sendSubscriptionToServer(subscription) {
+export function userDismissedPrompt(user) {
+  return `dismissed-prompt-${user.get('id')}`;
+}
+
+function sendSubscriptionToServer(subscription, sendConfirmation) {
   ajax('/push_notifications/subscribe', {
     type: 'POST',
-    data: { subscription: subscription.toJSON() }
+    data: { subscription: subscription.toJSON(), send_confirmation: sendConfirmation }
   });
 }
 
@@ -46,7 +50,7 @@ export function register(user, mobileView, router) {
   navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
     serviceWorkerRegistration.pushManager.getSubscription().then(subscription => {
       if (subscription) {
-        sendSubscriptionToServer(subscription);
+        sendSubscriptionToServer(subscription, false);
         // Resync localStorage
         keyValueStore.setItem(userSubscriptionKey(user), 'subscribed');
       }
@@ -69,7 +73,7 @@ export function subscribe(callback, applicationServerKey) {
       userVisibleOnly: true,
       applicationServerKey: new Uint8Array(applicationServerKey.split("|")) // eslint-disable-line no-undef
     }).then(subscription => {
-      sendSubscriptionToServer(subscription);
+      sendSubscriptionToServer(subscription, true);
       if (callback) callback();
     }).catch(e => Ember.Logger.error(e));
   });

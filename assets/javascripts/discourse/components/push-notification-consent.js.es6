@@ -5,7 +5,8 @@ import {
   unsubscribe as unsubscribePushNotification,
   isPushNotificationsSupported,
   keyValueStore as pushNotificationKeyValueStore,
-  userSubscriptionKey as pushNotificationUserSubscriptionKey
+  userSubscriptionKey as pushNotificationUserSubscriptionKey,
+  userDismissedPrompt as pushNotificationUserDismissedPrompt,
 } from 'discourse/plugins/discourse-push-notifications/discourse/lib/push-notifications';
 
 import {
@@ -18,19 +19,28 @@ const desktopNotificationkeyValueStore = new KeyValueStore(context);
 
 export default Ember.Component.extend({
   @computed
-  showPushNotification() {
+  bannerDismissed: {
+    set(value) {
+      const user = this.currentUser;
+      pushNotificationKeyValueStore.setItem(pushNotificationUserDismissedPrompt(user), value);
+      return pushNotificationKeyValueStore.getItem(pushNotificationUserDismissedPrompt(user));
+    },
+    get() {
+      return pushNotificationKeyValueStore.getItem(pushNotificationUserDismissedPrompt(Discourse.User.current()));
+    }
+  },
+
+  @computed
+  showPushNotificationPrompt() {
     return (this.siteSettings.push_notifications_enabled &&
-              isPushNotificationsSupported()
+            this.siteSettings.push_notifications_prompt &&
+            Notification.permission !== "denied" &&
+              isPushNotificationsSupported() && this.currentUser
             );
   },
 
   @computed
-  isDeniedPermission() {
-    return Notification.permission === "denied";
-  },
-
-  @computed
-  isSubscribed: {
+  pushNotificationSubscribed: {
     set(value) {
       const user = this.currentUser;
       pushNotificationKeyValueStore.setItem(pushNotificationUserSubscriptionKey(user), value);
@@ -41,33 +51,16 @@ export default Ember.Component.extend({
     }
   },
 
-  @computed("isDeniedPermission", "isSubscribed")
-  isAvailable(isDeniedPermission, isSubscribed) {
-    return !isDeniedPermission && !isSubscribed;
-  },
-
-  @computed("isSubscribed")
-  instructions(isSubscribed) {
-    if (isSubscribed) {
-      return I18n.t("discourse_push_notifications.disable_note");
-    } else {
-      return I18n.t("discourse_push_notifications.enable_note");
-    }
-  },
-
   actions: {
     subscribe() {
       subscribePushNotification(() => {
         desktopNotificationkeyValueStore.setItem('notifications-disabled', 'disabled');
         unsubscribeToNotificationAlert(this.messageBus, this.currentUser);
-        this.set("isSubscribed", 'subscribed');
+        this.setProperties({bannerDismissed: true, pushNotificationSubscribed: 'subscribed'});
       }, this.siteSettings.vapid_public_key_bytes);
     },
-
-    unsubscribe() {
-      unsubscribePushNotification(() => {
-        this.set("isSubscribed", '');
-      });
+    dismiss() {
+      this.set("bannerDismissed", true);
     }
   }
 });
