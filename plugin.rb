@@ -11,6 +11,7 @@ enabled_site_setting :push_notifications_enabled
 
 register_service_worker "javascripts/push-service-worker.js"
 register_asset "stylesheets/push-notifications.scss"
+register_asset "stylesheets/push-notifications-mobile.scss", :mobile
 
 after_initialize do
   module ::DiscoursePushNotifications
