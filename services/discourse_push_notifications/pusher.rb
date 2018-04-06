@@ -21,7 +21,7 @@ module DiscoursePushNotifications
           base_url: Discourse.base_url,
           url: payload[:post_url]
         }
-        send user, subscription, message
+        send_notification user, subscription, message
       end
 
       user.save_custom_fields(true) if updated
@@ -51,7 +51,7 @@ module DiscoursePushNotifications
           tag: "#{Discourse.current_hostname}-subscription"
         }
 
-        send user, subscription, message
+        send_notification user, subscription, message
       end
     end
 
@@ -66,7 +66,7 @@ module DiscoursePushNotifications
       subscription["endpoint"].split("/").last
     end
 
-    def self.send(user, subscription, message)
+    def self.send_notification(user, subscription, message)
       begin
         response = Webpush.payload_send(
           endpoint: subscription["endpoint"],
