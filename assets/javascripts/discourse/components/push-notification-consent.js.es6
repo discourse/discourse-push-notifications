@@ -48,10 +48,11 @@ export default Ember.Component.extend({
   showPushNotificationPrompt(pushNotificationSubscribed, bannerDismissed) {
     return (this.siteSettings.push_notifications_enabled &&
             this.siteSettings.push_notifications_prompt &&
+            isPushNotificationsSupported() &&
+            this.currentUser &&
             Notification.permission !== "denied" &&
-            isPushNotificationsSupported() && this.currentUser
-            && !pushNotificationSubscribed
-            && !bannerDismissed
+            !pushNotificationSubscribed &&
+            !bannerDismissed
            );
   },
 
