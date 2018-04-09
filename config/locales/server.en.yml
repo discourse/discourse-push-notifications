@@ -2,6 +2,7 @@ en:
   site_settings:
     push_notifications_enabled: Enable push notifications?
     push_notifications_prompt: Display user consent prompt.
+    push_notifications_icon_url: The badge icon that appears in the notification corner. Recommended size is 96px by 96px.
   discourse_push_notifications:
     popup:
       mentioned: '%{username} mentioned you in "%{topic}" - %{site_title}'

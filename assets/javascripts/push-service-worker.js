@@ -1,7 +1,8 @@
-function showNotification(title, body, icon, tag, baseUrl, url) {
+function showNotification(title, body, icon, badge, tag, baseUrl, url) {
   var notificationOptions = {
     body: body,
     icon: icon,
+    badge: badge,
     data: { url: url, baseUrl: baseUrl },
     tag: tag
   }
@@ -20,7 +21,7 @@ self.addEventListener('push', function(event) {
         });
       }
 
-      return showNotification(payload.title, payload.body, payload.icon, payload.tag, payload.base_url, payload.url);
+      return showNotification(payload.title, payload.body, payload.icon, payload.badge, payload.tag, payload.base_url, payload.url);
     })
   );
 });

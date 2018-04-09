@@ -16,7 +16,8 @@ module DiscoursePushNotifications
             username: payload[:username]
           ),
           body: payload[:excerpt],
-          icon: SiteSetting.logo_small_url || SiteSetting.logo_url,
+          badge: get_badge,
+          icon: "#{Discourse.base_url}/plugins/discourse-push-notifications/images/#{Notification.types[payload[:notification_type]]}.png",
           tag: "#{Discourse.current_hostname}-#{payload[:topic_id]}",
           base_url: Discourse.base_url,
           url: payload[:post_url]
@@ -47,7 +48,8 @@ module DiscoursePushNotifications
           title: I18n.t("discourse_push_notifications.popup.confirm_title",
                         site_title: SiteSetting.title),
           body: I18n.t("discourse_push_notifications.popup.confirm_body"),
-          icon: SiteSetting.logo_small_url || SiteSetting.logo_url,
+          icon:  "#{Discourse.base_url}/plugins/discourse-push-notifications/images/check.png",
+          badge: get_badge,
           tag: "#{Discourse.current_hostname}-subscription"
         }
 
@@ -61,6 +63,12 @@ module DiscoursePushNotifications
     end
 
     protected
+
+    def self.get_badge
+      return !SiteSetting.push_notifications_icon_url.blank? ?
+        SiteSetting.push_notifications_icon_url :
+        "#{Discourse.base_url}/plugins/discourse-push-notifications/images/discourse.png"
+    end
 
     def self.extract_unique_id(subscription)
       subscription["endpoint"].split("/").last
