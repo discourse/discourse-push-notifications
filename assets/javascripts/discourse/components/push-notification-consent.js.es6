@@ -51,6 +51,7 @@ export default Ember.Component.extend({
             isPushNotificationsSupported() &&
             this.currentUser &&
             Notification.permission !== "denied" &&
+            Notification.permission !== "granted" &&
             !pushNotificationSubscribed &&
             !bannerDismissed
            );
