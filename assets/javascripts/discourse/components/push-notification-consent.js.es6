@@ -44,12 +44,18 @@ export default Ember.Component.extend({
     }
   },
 
+  @computed
+  consentPrompt() {
+    return I18n.t('discourse_push_notifications.consent_prompt', {preferences: `${Discourse.BaseUri}/u/${this.currentUser.username}/preferences/notifications`});
+  },
+
   @computed("pushNotificationSubscribed", "bannerDismissed")
   showPushNotificationPrompt(pushNotificationSubscribed, bannerDismissed) {
     return (this.siteSettings.push_notifications_enabled &&
             this.siteSettings.push_notifications_prompt &&
             isPushNotificationsSupported() &&
             this.currentUser &&
+            this.currentUser.reply_count + this.currentUser.topic_count > 0 &&
             Notification.permission !== "denied" &&
             Notification.permission !== "granted" &&
             !pushNotificationSubscribed &&
