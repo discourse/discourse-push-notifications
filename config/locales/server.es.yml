@@ -1,12 +1,16 @@
 es:
   site_settings:
     push_notifications_enabled: ¿Activar notificaciones push?
+    push_notifications_prompt: Mostrar mensaje para pedir consentimiento al usuario.
+    push_notifications_icon_url: El icono que aparece en la esquina de la notificación. El tamaño recomendado es de 96px por 96px.
   discourse_push_notifications:
     popup:
-      mentioned: '%{username} te mencionó en "%{topic}" - %{site_title}'
-      group_mentioned: '%{username} te mencionó en "%{topic}" - %{site_title}'
-      quoted: '%{username} te citó en "%{topic}" - %{site_title}'
-      replied: '%{username} te respondió en "%{topic}" - %{site_title}'
-      posted: '%{username} publicó en "%{topic}" - %{site_title}'
-      private_message: '%{username} te envió un mensaje privado en "%{topic}" - %{site_title}'
-      linked: '%{username} enlazó a tu post desde "%{topic}" - %{site_title}'
+      mentioned: '%{username} te ha mencionado en "%{topic}" - %{site_title}'
+      group_mentioned: '%{username} te ha mencionado en "%{topic}" - %{site_title}'
+      quoted: '%{username} te ha citado en "%{topic}" - %{site_title}'
+      replied: '%{username} te ha respondido en "%{topic}" - %{site_title}'
+      posted: '%{username} ha publicado en "%{topic}" - %{site_title}'
+      private_message: '%{username} te ha enviado un mensaje privado en "%{topic}" - %{site_title}'
+      linked: '%{username} ha enlazado tu post desde "%{topic}" - %{site_title}'
+      confirm_title: 'Notificaciones activadas - %{site_title}'
+      confirm_body: '¡Ya está! Las notificaciones han sido activadas.'
