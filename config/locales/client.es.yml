@@ -1,8 +1,10 @@
 es:
   js:
     discourse_push_notifications:
-      title: "Notificaciones Push"
+      title: "Notificaciones push"
       disable: "Desactivar notificaciones push"
       enable: "Activar notificaciones push"
-      enable_note: "Tendrías que cambiar esta opción en todos los navegadores que utilices y esto desactivará las notificaciones de escritorio."
-      disable_note: "Tendrías que cambiar esta opción en todos los navegadores que utilices."
+      enable_note: "Tienes que cambiar este ajuste en cada navegador que utilices y se desactivarán las notificaciones de escritorio."
+      disable_note: "Tienes que cambiar este ajuste en todos los navegadores que utilices."
+      consent_prompt: "¿Quieres recibir <a href=\"%{preferences}\">notificaciones en tiempo real</a> cuando alguien te responda?"
+      consent_enable: "Activar"
