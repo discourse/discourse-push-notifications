@@ -1,5 +1,5 @@
 # discourse-push-notifications
-Plugin for integrating Chrome and FireFox push notifications
+Plugin for integrating Chrome and FireFox push notifications on desktop
 
 # Installation
 

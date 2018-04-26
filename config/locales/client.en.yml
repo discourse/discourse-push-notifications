@@ -1,10 +1,5 @@
 en:
   js:
     discourse_push_notifications:
-      title: "Push Notifications"
-      disable: "Disable Push Notifications"
-      enable: "Enable Push Notifications"
-      enable_note: "You have to change this setting on every browser you use and this will disable Desktop Notifications."
-      disable_note: "You have to change this setting on every browser you use."
-      consent_prompt: "Do you want <a href=\"%{preferences}\">live notifications</a> when people reply to your posts?"
-      consent_enable: "Enable"
+      title: "Desktop Push Notifications"
+      note: "Prefer push notifications on Desktop when enabling live notifications."
