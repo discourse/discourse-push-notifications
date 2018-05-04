@@ -1,7 +1,7 @@
 import { default as computed } from 'ember-addons/ember-computed-decorators';
 import {
   keyValueStore
-} from 'discourse/plugins/discourse-push-notifications/discourse/lib/push-notifications';
+} from 'discourse/lib/push-notifications';
 
 export default Ember.Component.extend({
 
