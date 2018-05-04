@@ -1,23 +1,13 @@
-{{#if showPushNotification}}
-  <div class='control-group push-notifications'>
+{{#if showSetting}}
+  <div class='control-group desktop-push-notifications'>
     <label class="control-label">{{i18n 'discourse_push_notifications.title'}}</label>
     <div class="controls">
-      <div>
-        {{#if isDeniedPermission}}
-          {{d-button icon="bell-slash-o" label="user.desktop_notifications.perm_denied_btn" disabled="true"}}
-          {{i18n "user.desktop_notifications.perm_denied_expl"}}
-        {{/if}}
-        {{#if isSubscribed}}
-          {{d-button icon="bell-slash-o" label="discourse_push_notifications.disable" action="unsubscribe"}}
-        {{/if}}
-        {{#if isAvailable}}
-          {{d-button icon="bell-o" label="discourse_push_notifications.enable" action="subscribe"}}
-        {{/if}}
-      </div>
-    </div>
-
-    <div class='instructions'>
-      {{instructions}}
+      <label class='checkbox-label'>
+        <input type="checkbox"
+               checked={{currentUser.custom_fields.discourse_push_notifications_prefer_push}}
+               onclick={{action "change" value="target.checked"}} />
+        {{i18n 'discourse_push_notifications.note'}}
+      </label>
     </div>
   </div>
 {{/if}}
