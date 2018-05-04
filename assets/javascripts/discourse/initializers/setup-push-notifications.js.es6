@@ -3,7 +3,7 @@ import { withPluginApi } from 'discourse/lib/plugin-api';
 import {
   keyValueStore,
   isPushNotificationsSupported
-} from 'discourse/plugins/discourse-push-notifications/discourse/lib/push-notifications';
+} from 'discourse/lib/push-notifications';
 
 export default {
   name: 'setup-push-notifications',
