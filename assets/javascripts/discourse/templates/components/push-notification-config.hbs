@@ -1,13 +1,8 @@
 {{#if showSetting}}
-  <div class='control-group desktop-push-notifications'>
-    <label class="control-label">{{i18n 'discourse_push_notifications.title'}}</label>
-    <div class="controls">
-      <label class='checkbox-label'>
-        <input type="checkbox"
-               checked={{currentUser.custom_fields.discourse_push_notifications_prefer_push}}
-               onclick={{action "change" value="target.checked"}} />
-        {{i18n 'discourse_push_notifications.note'}}
-      </label>
-    </div>
-  </div>
+  <label class='checkbox-label'>
+    <input type="checkbox"
+           checked={{currentUser.custom_fields.discourse_push_notifications_prefer_push}}
+           onclick={{action "change" value="target.checked"}} />
+    {{i18n 'discourse_push_notifications.note'}}
+  </label>
 {{/if}}
