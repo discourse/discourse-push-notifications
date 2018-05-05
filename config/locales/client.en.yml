@@ -1,4 +1,4 @@
 en:
   js:
     discourse_push_notifications:
-      note: "Prefer push notifications on Desktop when enabling live notifications."
+      note: "Prefer push notifications on Desktop."
