@@ -1,53 +1,57 @@
-import { withPluginApi } from 'discourse/lib/plugin-api';
+import { withPluginApi } from "discourse/lib/plugin-api";
 
 import {
   keyValueStore,
   isPushNotificationsSupported
-} from 'discourse/lib/push-notifications';
+} from "discourse/lib/push-notifications";
 
 export default {
-  name: 'setup-push-notifications',
+  name: "setup-push-notifications",
   initialize(container) {
-    withPluginApi('0.1', api => {
-      const siteSettings = container.lookup('site-settings:main');
-      const router = container.lookup('router:main');
-      const site = container.lookup('site:main');
-
+    withPluginApi("0.1", api => {
+      const siteSettings = container.lookup("site-settings:main");
+      const router = container.lookup("router:main");
+      const site = container.lookup("site:main");
 
       if (!Ember.testing && api.getCurrentUser()) {
-        if(siteSettings.desktop_push_notifications_enabled) {
+        if (siteSettings.desktop_push_notifications_enabled) {
           //open class up, add property for saving on notifications
-          api.modifyClass('controller:preferences/notifications', {
-            saveAttrNames:[
-              'muted_usernames',
-              'new_topic_duration_minutes',
-              'auto_track_topics_after_msecs',
-              'notification_level_when_replying',
-              'like_notification_frequency',
-              'allow_private_messages',
-              'custom_fields',
-            ],
+          api.modifyClass("controller:preferences/notifications", {
+            saveAttrNames: [
+              "muted_usernames",
+              "new_topic_duration_minutes",
+              "auto_track_topics_after_msecs",
+              "notification_level_when_replying",
+              "like_notification_frequency",
+              "allow_private_messages",
+              "custom_fields"
+            ]
           });
 
-          api.modifyClass('component:desktop-notification-config', {
+          api.modifyClass("component:desktop-notification-config", {
             isPushNotificationsPreferred() {
-              if(!this.site.mobileView && !keyValueStore.getItem('prefer_push')) {
+              if (
+                !this.site.mobileView &&
+                !keyValueStore.getItem("prefer_push")
+              ) {
                 return false;
               }
               return isPushNotificationsSupported(this.site.mobileView);
             }
-          })
+          });
 
           // add key, prefer push
-          if(api.getCurrentUser().custom_fields['discourse_push_notifications_prefer_push']) {
-            keyValueStore.setItem('prefer_push', 'true');
+          if (
+            api.getCurrentUser().custom_fields[
+              "discourse_push_notifications_prefer_push"
+            ]
+          ) {
+            keyValueStore.setItem("prefer_push", "true");
+          } else {
+            keyValueStore.setItem("prefer_push", "");
           }
-          else {
-            keyValueStore.setItem('prefer_push', '');
-          }
-        }
-        else {
-          keyValueStore.setItem('prefer_push', '');
+        } else {
+          keyValueStore.setItem("prefer_push", "");
         }
       }
     });
