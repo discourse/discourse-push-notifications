@@ -18,5 +18,11 @@ after_initialize do
     end
   end
 
-  User.register_custom_field_type("#{DiscoursePushNotifications::PLUGIN_NAME}_prefer_push", :boolean)
+  custom_field_name = "#{DiscoursePushNotifications::PLUGIN_NAME}_prefer_push"
+
+  if respond_to?(:register_editable_user_custom_field)
+    register_editable_user_custom_field custom_field_name
+  end
+
+  User.register_custom_field_type(custom_field_name, :boolean)
 end
