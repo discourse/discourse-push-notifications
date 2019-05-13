@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # name: discourse-push-notifications
 # about: Plugin for integrating Chrome and FireFox push notifications
 # version: 0.3.0
