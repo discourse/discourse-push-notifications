@@ -10,8 +10,6 @@ export default {
   initialize(container) {
     withPluginApi("0.1", api => {
       const siteSettings = container.lookup("site-settings:main");
-      const router = container.lookup("router:main");
-      const site = container.lookup("site:main");
 
       if (!Ember.testing && api.getCurrentUser()) {
         if (siteSettings.desktop_push_notifications_enabled) {
