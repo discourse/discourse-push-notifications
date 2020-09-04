@@ -2,13 +2,13 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 
 import {
   keyValueStore,
-  isPushNotificationsSupported
+  isPushNotificationsSupported,
 } from "discourse/lib/push-notifications";
 
 export default {
   name: "setup-push-notifications",
   initialize(container) {
-    withPluginApi("0.1", api => {
+    withPluginApi("0.1", (api) => {
       const siteSettings = container.lookup("site-settings:main");
 
       if (!Ember.testing && api.getCurrentUser()) {
@@ -22,8 +22,8 @@ export default {
               "notification_level_when_replying",
               "like_notification_frequency",
               "allow_private_messages",
-              "custom_fields"
-            ]
+              "custom_fields",
+            ],
           });
 
           api.modifyClass("component:desktop-notification-config", {
@@ -35,7 +35,7 @@ export default {
                 return false;
               }
               return isPushNotificationsSupported(this.site.mobileView);
-            }
+            },
           });
 
           // add key, prefer push
@@ -53,5 +53,5 @@ export default {
         }
       }
     });
-  }
+  },
 };

@@ -22,6 +22,6 @@ export default Ember.Component.extend({
         );
         keyValueStore.setItem("prefer_push", "");
       }
-    }
-  }
+    },
+  },
 });
