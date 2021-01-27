@@ -1,8 +1,8 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 import {
-  keyValueStore,
   isPushNotificationsSupported,
+  keyValueStore,
 } from "discourse/lib/push-notifications";
 
 export default {
