@@ -1,8 +1,9 @@
 {{#if showSetting}}
-  <label class='checkbox-label'>
+  <label class="checkbox-label">
     <input type="checkbox"
-           checked={{currentUser.custom_fields.discourse_push_notifications_prefer_push}}
-           onclick={{action "change" value="target.checked"}} />
-    {{i18n 'discourse_push_notifications.note'}}
+      checked={{currentUser.custom_fields.discourse_push_notifications_prefer_push}}
+      onclick={{action "change" value="target.checked"}}
+    >
+    {{i18n "discourse_push_notifications.note"}}
   </label>
 {{/if}}
