@@ -1,8 +1,8 @@
-import { default as computed } from "ember-addons/ember-computed-decorators";
+import discourseComputed from "discourse-common/utils/decorators";
 import { keyValueStore } from "discourse/lib/push-notifications";
 
 export default Ember.Component.extend({
-  @computed
+  @discourseComputed
   showSetting() {
     return this.siteSettings.desktop_push_notifications_enabled;
   },
