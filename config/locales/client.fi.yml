@@ -1,8 +1,7 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
 fi:
-  js:
-    discourse_push_notifications:
-      title: "Push-ilmoitukset"
-      disable: "Poista push-ilmoitukset käytöstä"
-      enable: "Ota push-ilmoitukset käyttöön"
-      enable_note: "Tämä asetus täytyy vaihtaa kaikissa selaimissa, joita käytät. Poistaa työpöytäilmoitukset käytöstä."
-      disable_note: "Tämä asetus täytyy vaihtaa kaikissa selaimissa, joita käytät."

@@ -1,12 +1,7 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
 de:
-  site_settings:
-    push_notifications_enabled: Push-Benachrichtigungen aktivieren?
-  discourse_push_notifications:
-    popup:
-      mentioned: '%{username} erwähnte dich in "%{topic}" - %{site_title}'
-      group_mentioned: '%{username} erwähnte dich in "%{topic}" - %{site_title}'
-      quoted: '%{username} zitierte dich in "%{topic}" - %{site_title}'
-      replied: '%{username} antwortete dir in "%{topic}" - %{site_title}'
-      posted: '%{username} postete in "%{topic}" - %{site_title}'
-      private_message: '%{username} sendete dir eine private Nachricht in "%{topic}" - %{site_title}'
-      linked: '%{username} verlinkte deinen Post von "%{topic}" - %{site_title}'
