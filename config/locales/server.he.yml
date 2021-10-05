@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 he:
+  site_settings:
+    desktop_push_notifications_enabled: לאפשר הודעות בדחיפה בשולחן העבודה
