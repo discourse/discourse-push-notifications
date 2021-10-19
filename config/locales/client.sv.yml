@@ -5,3 +5,6 @@
 # https://translate.discourse.org/
 
 sv:
+  js:
+    discourse_push_notifications:
+      note: "Föredra push-meddelanden på dator"
