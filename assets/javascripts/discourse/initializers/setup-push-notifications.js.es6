@@ -15,6 +15,7 @@ export default {
         if (siteSettings.desktop_push_notifications_enabled) {
           //open class up, add property for saving on notifications
           api.modifyClass("controller:preferences/notifications", {
+            pluginId: "discourse-push-notifications",
             saveAttrNames: [
               "muted_usernames",
               "new_topic_duration_minutes",
@@ -27,6 +28,7 @@ export default {
           });
 
           api.modifyClass("component:desktop-notification-config", {
+            pluginId: "discourse-push-notifications",
             isPushNotificationsPreferred() {
               if (
                 !this.site.mobileView &&
