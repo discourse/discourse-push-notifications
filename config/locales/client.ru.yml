@@ -5,3 +5,6 @@
 # https://translate.discourse.org/
 
 ru:
+  js:
+    discourse_push_notifications:
+      note: "Включить push-уведомления на рабочем столе"

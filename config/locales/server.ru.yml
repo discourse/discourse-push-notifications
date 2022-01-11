@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ru:
+  site_settings:
+    desktop_push_notifications_enabled: Разрешить push-уведомления на рабочем столе
