@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ar:
+  site_settings:
+    desktop_push_notifications_enabled: السماح بالإشعارات الفورية على سطح المكتب

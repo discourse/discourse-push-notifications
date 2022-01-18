@@ -5,3 +5,6 @@
 # https://translate.discourse.org/
 
 zh_CN:
+  js:
+    discourse_push_notifications:
+      note: "在桌面设备上首选推送通知"

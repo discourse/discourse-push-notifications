@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 de:
+  site_settings:
+    desktop_push_notifications_enabled: Push-Benachrichtigungen auf dem Desktop erlauben
