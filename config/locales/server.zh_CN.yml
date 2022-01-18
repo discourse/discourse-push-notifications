@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 zh_CN:
+  site_settings:
+    desktop_push_notifications_enabled: 在桌面设备上允许推送通知

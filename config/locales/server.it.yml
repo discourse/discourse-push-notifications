@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 it:
+  site_settings:
+    desktop_push_notifications_enabled: Consenti notifiche push su desktop
