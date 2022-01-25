@@ -5,3 +5,6 @@
 # https://translate.discourse.org/
 
 ja:
+  js:
+    discourse_push_notifications:
+      note: "デスクトップでのプッシュ通知を優先する"
