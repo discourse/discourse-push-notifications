@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ja:
+  site_settings:
+    desktop_push_notifications_enabled: デスクトップでのプッシュ通知を許可する

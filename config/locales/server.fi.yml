@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 fi:
+  site_settings:
+    desktop_push_notifications_enabled: Salli push-ilmoitukset työpöytälaitteella
