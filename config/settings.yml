@@ -1,4 +1,0 @@
-plugins:
-  desktop_push_notifications_enabled:
-    default: false
-    client: true
