@@ -1,7 +1,0 @@
-{
-  "author": "Discourse",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint-config-discourse": "^1.1.8"
-  }
-}

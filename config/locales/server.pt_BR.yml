@@ -1,9 +1,0 @@
-# WARNING: Never edit this file.
-# It will be overwritten when translations are pulled from Crowdin.
-#
-# To work with us on translations, join this project:
-# https://translate.discourse.org/
-
-pt_BR:
-  site_settings:
-    desktop_push_notifications_enabled: Permitir notificações por push no desktop
